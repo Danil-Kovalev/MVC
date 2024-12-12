@@ -1,0 +1,1 @@
+DELETE FROM `booksV2` WHERE id=?

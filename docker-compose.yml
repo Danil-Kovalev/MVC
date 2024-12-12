@@ -1,0 +1,53 @@
+services:
+  # 1. Node.js (TypeScript) контейнер
+  node-app:
+    build:
+      context: ./MVC
+    container_name: node-container
+    restart: always
+    volumes:
+      - ./MVC:/usr/local/MVC
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    depends_on:
+      - mysql
+
+  # 2. MySQL контейнер з бекапом
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"    # Пароль для root користувача
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d # Точка монтування для бекапів
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+  # 3. Nginx контейнер
+  nginx:
+    image: nginx:latest
+    container_name: nginx-container
+    restart: always
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./MVC/views:/var/www/html
+    ports:
+      - "80:80"
+    depends_on:
+      - node-app
+    networks:
+      - app-network
+
+volumes:
+  mysql_data: # Тому що ми використовуємо volume для зберігання даних MySQL
+
+networks:
+  app-network:
+    driver: bridge
