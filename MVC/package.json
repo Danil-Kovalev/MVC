@@ -2,11 +2,12 @@
   "name": "mvc",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/src/src/serverV1.js",
+  "main": "./dist/src/back/src/serverV1.js",
   "type": "module",
   "scripts": {
     "build": "rm -rf ./dist && tsc",
-    "start": "node dist/src/back/src/serverV1.js"
+    "start": "node dist/src/back/src/serverV1.js",
+    "test": "npm run build && mocha ./dist/src/test/routes.test.js"
   },
   "author": "",
   "license": "ISC",
@@ -28,14 +29,24 @@
     "sync-mysql": "^3.0.1"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.26.0",
+    "@types/chai": "^5.0.1",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.20",
     "@types/express-session": "^1.17.9",
+    "@types/jest": "^29.5.14",
     "@types/multer": "^1.4.11",
     "@types/node": "^20.11.6",
     "@types/session-file-store": "^1.2.4",
+    "@types/supertest": "^6.0.2",
+    "chai": "^5.1.2",
+    "jest": "^29.7.0",
+    "mocha": "^11.0.1",
     "nodemon": "^3.0.2",
     "sequelize-cli": "^6.6.2",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   }
 }

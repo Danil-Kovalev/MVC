@@ -81,3 +81,4 @@ app.post('/admin/api/v1/image', upload.single('new-img'), (req, res) => {
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server V1 starts on port ${PORT}`);
 });
+export default app;
