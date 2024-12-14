@@ -36,7 +36,6 @@ app.set('views', path.join(dirname, '/views'));
  * Main page with books
  */
 app.get('/', (req, res) => {
-    console.log("It works!");
     res.render(path.join(dirname, '/views/books-page.ejs'));
 });
 /**
